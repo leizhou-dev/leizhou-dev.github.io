@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lei Zhou — ServiceNow Architect &amp; Developer</title>
+<meta name="description" content="Lei Zhou, ServiceNow architect, developer and Certified System Administrator in Bavaria, Germany. Scoped apps, Flow Designer, Service Portal and REST integrations, backed by 15+ years in retail IT operations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDF0F3;
+    --panel:#FFFFFF;
+    --ink:#18212C;
+    --muted:#55606D;
+    --line:#C9D0D8;
+    --route:#1D5A73;      /* the flow line, primary accent */
+    --done:#2F7D57;       /* state: complete */
+    --active:#B7791F;     /* state: in progress */
+    --draft:#FFF4D6;      /* placeholder highlight */
+    --measure:68ch;
+    --step: clamp(1rem, .96rem + .2vw, 1.125rem);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Schibsted Grotesk",system-ui,sans-serif;font-size:var(--step);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--route);text-underline-offset:.18em}
+  a:hover{color:var(--ink)}
+  :focus-visible{outline:3px solid var(--active);outline-offset:3px;border-radius:2px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+  /* header */
+  header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+  .mark{font-weight:800;letter-spacing:-.02em;text-decoration:none;color:var(--ink);font-size:1.05rem}
+  nav ul{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0}
+  nav a{text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem}
+  nav a:hover{color:var(--ink)}
+  .btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;padding:.6rem 1.05rem;border-radius:6px;font-size:.95rem}
+  .btn:hover{background:var(--route);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:#fff}
+  @media (max-width:760px){nav ul{display:none}}
+
+  /* hero */
+  .hero{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(3rem,6vw,5rem)}
+  .hero h1{font-size:clamp(2.6rem,1.6rem + 4.4vw,5.4rem);line-height:.98;letter-spacing:-.035em;font-weight:800;margin:0 0 1.5rem;max-width:14ch}
+  .hero .lede{font-size:clamp(1.15rem,1rem + .6vw,1.45rem);line-height:1.45;max-width:40ch;margin:0 0 1.75rem;color:var(--ink)}
+  .status{display:flex;align-items:center;gap:.6rem;color:var(--muted);font-size:.98rem;margin:0 0 2rem}
+  .dot{width:.65rem;height:.65rem;border-radius:50%;background:var(--done);box-shadow:0 0 0 4px color-mix(in srgb,var(--done) 20%,transparent);flex:none}
+  .cta{display:flex;gap:.75rem;flex-wrap:wrap}
+
+  /* the flow: the one memorable element */
+  .flow{margin-top:clamp(3rem,6vw,4.5rem);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(1.25rem,3vw,2rem)}
+  .flow-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+  .flow-head h2{font-size:1rem;margin:0;font-weight:700}
+  .flow-head p{margin:0;color:var(--muted);font-size:.92rem}
+  .flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+  .flow ol::before{content:"";position:absolute;left:10%;right:10%;top:15px;height:3px;background:var(--line);border-radius:2px}
+  .flow ol::after{content:"";position:absolute;left:10%;top:15px;height:3px;width:80%;background:var(--route);border-radius:2px;transform-origin:left;animation:run 2.4s cubic-bezier(.6,.1,.2,1) .3s both}
+  .flow li{position:relative;z-index:1;text-align:center;padding:0 .4rem}
+  .node{width:33px;height:33px;margin:0 auto .8rem;border-radius:50%;background:var(--panel);border:3px solid var(--route);display:grid;place-items:center;animation:pop .35s ease-out both}
+  .node svg{width:15px;height:15px;stroke:var(--route);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .flow li:last-child .node{background:var(--done);border-color:var(--done)}
+  .flow li:last-child .node svg{stroke:#fff}
+  .flow li:nth-child(1) .node{animation-delay:.3s}
+  .flow li:nth-child(2) .node{animation-delay:.85s}
+  .flow li:nth-child(3) .node{animation-delay:1.4s}
+  .flow li:nth-child(4) .node{animation-delay:1.95s}
+  .flow li:nth-child(5) .node{animation-delay:2.5s}
+  .flow strong{display:block;font-size:.98rem;line-height:1.25;margin-bottom:.25rem}
+  .flow span{display:block;color:var(--muted);font-size:.85rem;line-height:1.35}
+  @keyframes run{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  @media (max-width:760px){
+    .flow ol{grid-template-columns:1fr;gap:1.1rem}
+    .flow ol::before,.flow ol::after{left:15px;right:auto;top:16px;bottom:16px;width:3px;height:auto}
+    .flow ol::after{transform-origin:top;animation-name:rundown}
+    .flow li{text-align:left;display:grid;grid-template-columns:33px 1fr;gap:1rem;align-items:start;padding:0}
+    .node{margin:0}
+  }
+  @keyframes rundown{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+  /* sections */
+  section.block{padding:clamp(3.5rem,7vw,5.5rem) 0;border-top:1px solid var(--line)}
+  .sec-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.6fr);gap:clamp(1.5rem,4vw,4rem)}
+  @media (max-width:860px){.sec-grid{grid-template-columns:1fr}}
+  .sec-title{font-size:clamp(1.6rem,1.2rem + 1.4vw,2.3rem);line-height:1.05;letter-spacing:-.025em;font-weight:800;margin:0}
+  .sec-note{color:var(--muted);margin:.75rem 0 0;font-size:.95rem;max-width:30ch}
+  p{max-width:var(--measure)}
+
+  /* capabilities */
+  .caps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 2.5rem;margin:0;padding:0;list-style:none}
+  @media (max-width:640px){.caps{grid-template-columns:1fr}}
+  .caps h3{font-size:1.12rem;margin:0 0 .4rem;letter-spacing:-.01em}
+  .caps p{margin:0;color:var(--muted)}
+  .caps li{border-left:3px solid var(--route);padding-left:1rem}
+
+  /* case studies */
+  .cases{display:grid;gap:1.25rem}
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(1.25rem,3vw,2rem)}
+  .case-top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:1rem}
+  .case h3{font-size:clamp(1.25rem,1.1rem + .5vw,1.5rem);letter-spacing:-.02em;margin:0;line-height:1.2;max-width:30ch}
+  .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+  .tags li{font-size:.8rem;font-weight:600;color:var(--route);background:color-mix(in srgb,var(--route) 9%,transparent);padding:.22rem .55rem;border-radius:4px}
+  .case dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem 2rem;margin:0}
+  @media (max-width:760px){.case dl{grid-template-columns:1fr}}
+  .case dt{font-weight:700;font-size:.92rem;margin-bottom:.3rem}
+  .case dd{margin:0;color:var(--muted);font-size:.97rem}
+  .case dd.result{color:var(--ink)}
+  .todo{background:var(--draft);color:#6B4E00;border-radius:3px;padding:0 .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .draft-banner{background:var(--draft);border:1px dashed #C9A13B;color:#5B4300;border-radius:8px;padding:.75rem 1rem;font-size:.92rem;margin:0 0 1.5rem;max-width:none}
+
+  /* career flow */
+  .career{list-style:none;margin:0;padding:0;position:relative}
+  .career::before{content:"";position:absolute;left:11px;top:10px;bottom:10px;width:2px;background:var(--line)}
+  .career > li{position:relative;padding:0 0 2.1rem 2.75rem}
+  .career > li:last-child{padding-bottom:0}
+  .career > li::before{content:"";position:absolute;left:4px;top:.35rem;width:16px;height:16px;border-radius:50%;background:var(--paper);border:3px solid var(--done)}
+  .career > li.now::before{border-color:var(--active);background:var(--active);box-shadow:0 0 0 5px color-mix(in srgb,var(--active) 22%,transparent)}
+  .when{color:var(--muted);font-size:.9rem;font-weight:500}
+  .career h3{margin:.1rem 0 .15rem;font-size:1.15rem;letter-spacing:-.01em}
+  .org{font-weight:600;color:var(--route);font-size:.97rem}
+  .career p{margin:.5rem 0 0;color:var(--muted)}
+  .career ul{margin:.5rem 0 0;padding-left:1.1rem;color:var(--muted)}
+  .career ul li{margin:.2rem 0}
+
+  /* certifications */
+  .certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;list-style:none;margin:0;padding:0}
+  @media (max-width:760px){.certs{grid-template-columns:1fr}}
+  .certs li{background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--done);border-radius:8px;padding:1.1rem 1.2rem}
+  .certs strong{display:block;font-size:1.05rem;line-height:1.25;margin-bottom:.35rem}
+  .certs span{color:var(--muted);font-size:.92rem}
+
+  /* contact */
+  .contact{background:var(--ink);color:#fff;border-radius:14px;padding:clamp(2rem,5vw,3.5rem)}
+  .contact h2{font-size:clamp(2rem,1.4rem + 2.4vw,3.2rem);letter-spacing:-.03em;line-height:1.02;margin:0 0 1rem;max-width:16ch}
+  .contact p{color:#C8D1DB;margin:0 0 1.75rem;max-width:46ch}
+  .contact .btn{background:#fff;color:var(--ink)}
+  .contact .btn:hover{background:var(--active);color:var(--ink)}
+  .contact .btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
+  .contact .btn.ghost:hover{background:#fff;color:var(--ink)}
+  .contact .plain{color:#C8D1DB;font-size:.92rem;margin-top:1.25rem}
+  .contact .plain a{color:#fff}
+  .contact .todo{color:#5B4300}
+
+  .icon-link{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);text-decoration:none}
+  .icon-link svg{width:20px;height:20px;fill:currentColor}
+  .icon-link svg.stroke{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round}
+  .icon-link:hover{background:var(--ink);color:#fff}
+  .icon-link.on-dark{color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
+  .icon-link.on-dark:hover{background:#fff;color:var(--ink)}
+  .cta{align-items:center}
+  footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.88rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">Lei Zhou</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="#contact">Get in touch</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1>I turn business requests into working ServiceNow.</h1>
+      <p class="lede">ServiceNow Developer and Certified System Administrator at ECCO. I build scoped apps, catalog items, Flow Designer automation and REST integrations, with 15 years of running retail IT behind me.</p>
+      <p class="status"><span class="dot" aria-hidden="true"></span>Open to ServiceNow architect, developer and platform engineer roles in Bavaria, hybrid or remote.</p>
+      <div class="cta">
+        <a class="btn" href="#work">See my work</a>
+        <a class="icon-link" href="https://www.linkedin.com/in/lei-zhou-8429221a" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.62 4.77 6.03v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4z"/></svg></a><a class="icon-link" href="mailto:chowray@hotmail.com" aria-label="Email chowray@hotmail.com" title="chowray@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a>
+      </div>
+
+      <div class="flow" aria-labelledby="flow-title">
+        <div class="flow-head">
+          <h2 id="flow-title">What I build, end to end</h2>
+          <p>One request, from the portal to the system that fulfils it.</p>
+        </div>
+        <ol>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div>
+            <div><strong>Business need</strong><span>Requirements with stakeholders</span></div>
+          </li>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+            <div><strong>Portal &amp; catalog</strong><span>Service Portal forms, catalog items</span></div>
+          </li>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6h3a3 3 0 0 1 3 3v0M8.5 18h3a3 3 0 0 0 3-3"/></svg></div>
+            <div><strong>Flow Designer</strong><span>Approvals, routing, fulfilment</span></div>
+          </li>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></div>
+            <div><strong>REST integration</strong><span>Jira, Azure and other platforms</span></div>
+          </li>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <div><strong>Fulfilled</strong><span>Tested, released, supported</span></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="what-title">
+    <div class="wrap sec-grid">
+      <div>
+        <h2 class="sec-title" id="what-title">What I do</h2>
+        <p class="sec-note">Six years on the ServiceNow platform for a global retailer.</p>
+      </div>
+      <ul class="caps">
+        <li>
+          <h3>Scoped applications &amp; catalog</h3>
+          <p>Custom scoped apps and service catalog items for global IT and business teams.</p>
+        </li>
+        <li>
+          <h3>Workflow automation</h3>
+          <p>Request routing, approvals and fulfilment in Flow Designer, with server-side JavaScript and Script Includes where flows aren't enough.</p>
+        </li>
+        <li>
+          <h3>Employee self-service</h3>
+          <p>Service Portal forms with validation, access controls and clear ticket visibility, so people can help themselves.</p>
+        </li>
+        <li>
+          <h3>Integrations</h3>
+          <p>REST integrations between ServiceNow and external platforms such as Jira and Azure, built on native REST where a paid spoke isn't worth the cost.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="work" aria-labelledby="work-title">
+    <div class="wrap sec-grid">
+      <div>
+        <h2 class="sec-title" id="work-title">Selected work</h2>
+        <p class="sec-note">Case studies from internal projects, described without confidential details.</p>
+      </div>
+      <div>
+        <div class="cases">
+
+          <article class="case">
+            <div class="case-top">
+              <h3>Integration architecture: ServiceNow ↔ Jira without paid middleware</h3>
+              <ul class="tags"><li>Integration design</li><li>Native REST</li><li>Cost vs. control</li></ul>
+            </div>
+            <dl>
+              <div><dt>Context</dt><dd>Three ways to connect ServiceNow and Jira: the out-of-box Jira spoke, which requires a paid Integration Hub package; Azure Automation as middleware, the common choice on the market but slow to respond; or native REST.</dd></div>
+              <div><dt>Design decision</dt><dd>Chose native REST: a direct point-to-point integration with no extra licence and no middleware layer, owned and versioned inside the platform.</dd></div>
+              <div><dt>Outcome</dt><dd class="result">Faster responses than the Azure Automation route, no Integration Hub licence cost, and full control over mappings and logic. A pattern that suits organisations that want to keep platform spend down.</dd></div>
+            </dl>
+          </article>
+
+          <article class="case">
+            <div class="case-top">
+              <h3>Access request design: nine reporting roles, one catalog item, one flow</h3>
+              <ul class="tags"><li>Catalog design</li><li>Flow Designer</li><li>Identity provisioning</li></ul>
+            </div>
+            <dl>
+              <div><dt>Context</dt><dd>Nine financial reporting access options, each needing approval and then the right Active Directory and Microsoft 365 group membership.</dd></div>
+              <div><dt>Design decision</dt><dd>One catalog item and one Flow Designer workflow for all nine options instead of nine separate items, with approval first and provisioning to Active Directory and Microsoft 365 groups only after approval.</dd></div>
+              <div><dt>Outcome</dt><dd class="result">Fewer catalog objects to maintain, one consistent approval path, and access granted automatically, with no manual group changes.</dd></div>
+            </dl>
+          </article>
+
+          <article class="case">
+            <div class="case-top">
+              <h3>Employee Center: evolving the portal without breaking it</h3>
+              <ul class="tags"><li>Employee Center</li><li>UX consistency</li><li>Release governance</li></ul>
+            </div>
+            <dl>
+              <div><dt>Context</dt><dd>Enhance the employee portal for any device and make it consistent to use, while the existing portal stayed in production.</dd></div>
+              <div><dt>Design decision</dt><dd>Responsive navigation, a reusable custom ticket survey widget, and one consistent pattern for approval and ticket actions across the portal, built to stay compatible with the existing portal.</dd></div>
+              <div><dt>Outcome</dt><dd class="result">Key changes validated in DEV before release, and full compatibility with the existing portal kept throughout.</dd></div>
+            </dl>
+          </article>
+
+          <article class="case">
+            <div class="case-top">
+              <h3>Retail system rollout across eight Asia-Pacific markets</h3>
+              <ul class="tags"><li>Retail systems</li><li>Cutover planning</li><li>Team lead</li></ul>
+            </div>
+            <dl>
+              <div><dt>Scope</dt><dd>A new retail system for ECCO stores in mainland China, Hong Kong, Macau, Taiwan, Singapore, Australia, Japan and South Korea.</dd></div>
+              <div><dt>My role</dt><dd>Led the team as IT Manager. Defined the cutover process, then ran system deployment, staff training and data migration in each market.</dd></div>
+              <div><dt>Result</dt><dd class="result">A smooth cutover with no disruption to store operations. Mainland China went live in about six months, and the other seven markets within a few months after.</dd></div>
+            </dl>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="career" aria-labelledby="career-title">
+    <div class="wrap sec-grid">
+      <div>
+        <h2 class="sec-title" id="career-title">Career</h2>
+        <p class="sec-note">20+ years in retail IT, from store systems to the platform that runs the service desk.</p>
+      </div>
+      <ol class="career" reversed>
+        <li class="now">
+          <div class="when">Mar 2020 – present, Bavaria (remote)</div>
+          <h3>ServiceNow Developer</h3>
+          <div class="org">ECCO</div>
+          <ul>
+            <li>Scoped applications, catalog items and approval workflows for global IT and business teams</li>
+            <li>Flow Designer and server-side JavaScript for routing, approvals and fulfilment</li>
+            <li>Service Portal and employee self-service: validation, access controls, ticket visibility</li>
+            <li>REST integrations with Jira, Azure and other platforms</li>
+            <li>Requirements, testing, release validation and production support</li>
+          </ul>
+        </li>
+        <li>
+          <div class="when">Sep 2018 – Jan 2025, Hamburg area</div>
+          <h3>Senior Retail Infrastructure Consultant</h3>
+          <div class="org">ECCO</div>
+          <p>IT infrastructure for ECCO's global retail stores, responsible for Asia-Pacific. Held alongside the ServiceNow role from 2020.</p>
+        </li>
+        <li>
+          <div class="when">Apr 2015 – Aug 2018, Shanghai</div>
+          <h3>IT Manager</h3>
+          <div class="org">ECCO</div>
+          <p>Infrastructure, service delivery and projects for retail. Built a server room from scratch and led the retail system rollout across eight APAC markets.</p>
+        </li>
+        <li>
+          <div class="when">Jan 2014 – Apr 2015, Shanghai</div>
+          <h3>Assistant IT Manager</h3>
+          <div class="org">ECCO</div>
+          <p>IT services across ECCO's Asia-Pacific markets.</p>
+        </li>
+        <li>
+          <div class="when">Nov 2007 – Jan 2014, Shanghai</div>
+          <h3>IT Specialist</h3>
+          <div class="org">Tesco</div>
+          <p>IT services and store-system support for daily retail operations.</p>
+        </li>
+        <li>
+          <div class="when">Aug 2004 – Nov 2007, Shanghai</div>
+          <h3>Retail Systems &amp; Infrastructure Engineer</h3>
+          <div class="org">RT-Mart</div>
+          <p>RT-Mart is one of China's largest hypermarket chains. In a small IT team, I covered the full stack from store systems to the data centre.</p>
+          <ul>
+            <li>Brought IT online for around 60 new store openings</li>
+            <li>Maintained and developed the retail systems used in stores</li>
+            <li>Administered terabyte-scale Oracle databases behind the retail systems</li>
+            <li>Maintained the server room and IT infrastructure</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="certifications" aria-labelledby="cert-title">
+    <div class="wrap sec-grid">
+      <div>
+        <h2 class="sec-title" id="cert-title">Certifications</h2>
+      </div>
+      <ul class="certs">
+        <li><strong>ServiceNow Certified System Administrator</strong><span>ServiceNow, 2022</span></li>
+        <li><strong>Project Management Professional (PMP)</strong><span>Project Management Institute, 2017</span></li>
+        <li><strong>ITIL Foundation in IT Service Management</strong><span>EXIN, 2015</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="contact" aria-labelledby="contact-title" style="border-top:0;padding-top:0">
+    <div class="wrap">
+      <div class="contact">
+        <h2 id="contact-title">Let's talk about your ServiceNow platform.</h2>
+        <p>I'm looking for my next role as a ServiceNow architect, developer or platform engineer. Based in Bavaria, open to hybrid and remote.</p>
+        <div class="cta">
+          <a class="icon-link on-dark" href="https://www.linkedin.com/in/lei-zhou-8429221a" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.62 4.77 6.03v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4z"/></svg></a><a class="icon-link on-dark" href="mailto:chowray@hotmail.com" aria-label="Email chowray@hotmail.com" title="chowray@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Lei Zhou</span>
+    <span>Bavaria, Germany</span>
+  </div>
+</footer>
+
+</body>
+</html>
