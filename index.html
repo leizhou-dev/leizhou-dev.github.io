@@ -60,9 +60,9 @@
   .flow-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
   .flow-head h2{font-size:1rem;margin:0;font-weight:700}
   .flow-head p{margin:0;color:var(--muted);font-size:.92rem}
-  .flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
-  .flow ol::before{content:"";position:absolute;left:10%;right:10%;top:15px;height:3px;background:var(--line);border-radius:2px}
-  .flow ol::after{content:"";position:absolute;left:10%;top:15px;height:3px;width:80%;background:var(--route);border-radius:2px;transform-origin:left;animation:run 2.4s cubic-bezier(.6,.1,.2,1) .3s both}
+  .flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+  .flow ol::before{content:"";position:absolute;left:8.33%;right:8.33%;top:15px;height:3px;background:var(--line);border-radius:2px}
+  .flow ol::after{content:"";position:absolute;left:8.33%;top:15px;height:3px;width:83.34%;background:var(--route);border-radius:2px;transform-origin:left;animation:run 2.9s cubic-bezier(.6,.1,.2,1) .3s both}
   .flow li{position:relative;z-index:1;text-align:center;padding:0 .4rem}
   .node{width:33px;height:33px;margin:0 auto .8rem;border-radius:50%;background:var(--panel);border:3px solid var(--route);display:grid;place-items:center;animation:pop .35s ease-out both}
   .node svg{width:15px;height:15px;stroke:var(--route);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
@@ -73,6 +73,7 @@
   .flow li:nth-child(3) .node{animation-delay:1.4s}
   .flow li:nth-child(4) .node{animation-delay:1.95s}
   .flow li:nth-child(5) .node{animation-delay:2.5s}
+  .flow li:nth-child(6) .node{animation-delay:3.05s}
   .flow strong{display:block;font-size:.98rem;line-height:1.25;margin-bottom:.25rem}
   .flow span{display:block;color:var(--muted);font-size:.85rem;line-height:1.35}
   @keyframes run{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -211,6 +212,10 @@
           <li>
             <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
             <div><strong>Portal &amp; catalog</strong><span>Service Portal forms, catalog items</span></div>
+          </li>
+          <li>
+            <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+            <div><strong>Scoped application</strong><span>Custom tables, logic, access control</span></div>
           </li>
           <li>
             <div class="node" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6h3a3 3 0 0 1 3 3v0M8.5 18h3a3 3 0 0 0 3-3"/></svg></div>
