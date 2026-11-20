@@ -51,6 +51,10 @@
   .dot{width:.65rem;height:.65rem;border-radius:50%;background:var(--done);box-shadow:0 0 0 4px color-mix(in srgb,var(--done) 20%,transparent);flex:none}
   .cta{display:flex;gap:.75rem;flex-wrap:wrap}
 
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .portrait{width:clamp(220px,26vw,340px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:22px;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(24,33,44,.45);display:block}
+  @media (max-width:760px){.hero-grid{grid-template-columns:1fr}.portrait{order:-1;width:132px;border-radius:16px}}
+
   /* the flow: the one memorable element */
   .flow{margin-top:clamp(3rem,6vw,4.5rem);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(1.25rem,3vw,2rem)}
   .flow-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
@@ -181,12 +185,17 @@
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <h1>I turn business requests into working ServiceNow.</h1>
-      <p class="lede">ServiceNow Developer and Certified System Administrator at ECCO. I build scoped apps, catalog items, Flow Designer automation and REST integrations, with 15 years of running retail IT behind me.</p>
-      <p class="status"><span class="dot" aria-hidden="true"></span>Open to ServiceNow architect, developer and platform engineer roles in Bavaria, hybrid or remote.</p>
-      <div class="cta">
-        <a class="btn" href="#work">See my work</a>
-        <a class="icon-link" href="https://www.linkedin.com/in/lei-zhou-8429221a" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.62 4.77 6.03v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4z"/></svg></a><a class="icon-link" href="mailto:chowray@hotmail.com" aria-label="Email chowray@hotmail.com" title="chowray@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a>
+      <div class="hero-grid">
+        <div class="hero-text">
+        <h1>I turn business requests into working ServiceNow.</h1>
+        <p class="lede">ServiceNow Developer and Certified System Administrator at ECCO. I build scoped apps, catalog items, Flow Designer automation and REST integrations, with 15 years of running retail IT behind me.</p>
+        <p class="status"><span class="dot" aria-hidden="true"></span>Open to ServiceNow architect, developer and platform engineer roles in Bavaria, hybrid or remote.</p>
+        <div class="cta">
+          <a class="btn" href="#work">See my work</a>
+          <a class="icon-link" href="https://www.linkedin.com/in/lei-zhou-8429221a" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.62 4.77 6.03v5.42h-4v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.25-1.84 2.54v4.88h-4z"/></svg></a><a class="icon-link" href="mailto:chowray@hotmail.com" aria-label="Email chowray@hotmail.com" title="chowray@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" class="stroke"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a>
+        </div>
+        </div>
+        <img class="portrait" src="photo.webp" width="360" height="360" alt="Portrait of Lei Zhou">
       </div>
 
       <div class="flow" aria-labelledby="flow-title">
